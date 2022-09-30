@@ -225,7 +225,10 @@ writing functions, perhaps safest to stick with `Either`? (From what I
 understand, the expectations is that any `IO` could fail with an exception,
 however. Watch out!)
 
-As a final note, this article builds up from scratch the idea of `Either`,
+This SO post has some good info on the particulars of how and when to use the
+various exception-catching methods: https://stackoverflow.com/a/6009807
+
+And as a final note, this article builds up from scratch the idea of `Either`,
 shows some interesting example of error-handling cases:
 
 https://www.schoolofhaskell.com/school/starting-with-haskell/basics-of-haskell/10_Error_Handling
