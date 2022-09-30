@@ -140,6 +140,10 @@ And of course, some *LYAH* explanations, which are always fun:
 
 http://learnyouahaskell.com/for-a-few-monads-more
 
+...and the haskell.org "All About Monads" page, which has... a lot:
+
+https://wiki.haskell.org/All_About_Monads
+
 ### Some useful monads
 
 * Maybe: obviously!
