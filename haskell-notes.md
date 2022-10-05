@@ -275,18 +275,18 @@ This SO post sums up some best-practices about when to use which construct:
 https://stackoverflow.com/a/4156831. Some of the most useful general
 recommendations:
 
-* In general, when in doubt, just stick with pattern matching by default, it's
-  usually nicer. If a pattern starts getting really ugly or convoluted, then
-  stop to consider how else you could write it. Besides using guards, other
-  options include extracting subexpressions as separate functions or putting
-  case expressions inside the function body in order to push some of the
-  pattern matching down onto them and out of the main definition.
-* Definitely don't use guards for things that could be trivially checked with
-  a pattern. Checking for empty lists is the classic example, use a pattern
-  match for that.
-* Definitely use guards when you need to make a choice based on some property
-  that doesn't correspond neatly to a pattern, e.g. comparing two Int values
-  to see which is larger.
+> * In general, when in doubt, just stick with pattern matching by default, it's
+>   usually nicer. If a pattern starts getting really ugly or convoluted, then
+>   stop to consider how else you could write it. Besides using guards, other
+>   options include extracting subexpressions as separate functions or putting
+>   case expressions inside the function body in order to push some of the
+>   pattern matching down onto them and out of the main definition.
+> * Definitely don't use guards for things that could be trivially checked with
+>   a pattern. Checking for empty lists is the classic example, use a pattern
+>   match for that.
+> * Definitely use guards when you need to make a choice based on some property
+>   that doesn't correspond neatly to a pattern, e.g. comparing two Int values
+>   to see which is larger.
 
 ### Pattern matching references
 
