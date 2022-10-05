@@ -1,8 +1,11 @@
 # Learn Me a Haskell, Finally
 
 Notes about things I keep forgetting, or continue to find confusing, while
-learning Haskell. This is not meant as a comprehensive guide, but rather is a
-scattered collection of useful information and resources.
+learning Haskell.
+
+This is not meant as a comprehensive guide, but rather is a scattered
+collection of useful information and resources. These notes cover some
+meta/toolchain stuff as well aspects of the language itself.
 
 (Note: I'm writing this selfishly. Primarily, *I* am the document's target
 audience. Apologies if I make some assumptions throughout. Also, I'm new to
@@ -36,6 +39,162 @@ yourself a book:
 Aside from books, this [CIS 194: Intro to
 Haskell](https://www.seas.upenn.edu/~cis1940/fall16/) course is supposedly a
 very good intro. And free!
+
+## Installation / Toolchain stuff
+
+Toolchain stuff. A nightmare in any language. And the current state of any
+language's ecosystem is the result of years of evolution, working to solve
+problems that beginners like us have no context for.
+
+Oh well! Whatever! Gotta start somewhere! Here's what's worked for me so far.
+Easy to set up, easy to maintain.
+
+### Initial setup
+
+0. Don't install GHC with your system's package manager. If you already did,
+   uninstall it. Fewer surprises down the road this way.
+1. Install [GHCup](https://www.haskell.org/ghcup/).
+2. Fire it up (`ghcup tui`) and use it to install GHC (the compiler), HLS
+   (language server, used for IDE-like features in your editor), and
+   (probably) Stack. (More on Stack later.) It will install cabal
+   automatically, I believe. (More on cabal later too.)
+3. If you're unsure about which versions to install, you can go by what GHCup
+   marks as "recommended". (Note that you can still use different versions of
+   GHC in your specific projects -- you're not "locked in" with this. It's
+   also very easy to install/uninstall different versions with GHCup. AND you
+   can have multiple versions installed simultaneously. So don't stress about
+   this step.)
+4. Put `~/.ghcup/bin` in your path, probably. (Or whatever the equivalent
+   directory is on your system. I'm on Ubuntu.)
+
+That's it for initial setup. You can keep everything updated easily with
+GHCup, and everything it does/installs is centralized to `~/.ghcup` (or your
+system's equivalent). If you screw it all up and want to start fresh, just
+blow that directory away. No harm.
+
+### Testing it out
+
+Now you can, e.g., run `ghci` from your terminal and poke around. Or use `ghc`
+to compile/interpret your one-off Haskell scripts. This is effectively your
+"system" version of GHC (thought it's confined to your home dir, not actually
+installed system-wide).
+
+That alone is probably enough to get you most of the way through beginner
+tutorials, and even most beginner books.
+
+### "Real" projects
+
+...but eventually you'll want to build real projects. Can o' worms.
+
+There's this whole "Stack or cabal" thing. Also, Stack *uses* cabal. Also,
+"Stack" refers to a couple of distinct ideas, sort of? And so does cabal? I
+don't have full context. Again, here's what got me started.
+
+Assuming you installed Stack as part of the steps above:
+
+1. `stack new cool-project-name`. This creates a fresh directory from a
+   default project template. Good enough for the likes of us, for now.
+2. `cd cool-project-name`. Poke around.
+3. `stack build`. This'll install dependencies, do initial setup if any is
+   required, generate some project files, etc. Note that Stack will also
+   install its own version of GHC for your project, depending on the config in
+   your `stack.yaml` file. More on this later. These versions go in
+   `~/.stack`, or your system's equivalent. (You don't have to worry about
+   them, or do anything special to use them. Stack takes care of it.)
+4. `stack exec cool-project-name-exe`. Run your code! (I personally popped
+   into my `package.yaml` and got rid of that `-exe` extension because it
+   looked weird to me, but YMMV.)
+
+I'm not going to go too in-depth here. I highly recommend *Get Programming in
+Haskell*, which uses Stack for all the projects in the latter half of the book
+and provides some great insight throughout.
+
+Some other useful stuff:
+
+* [The Stack intro user guide](https://docs.haskellstack.org/en/stable/GUIDE/)
+* [stack.yaml versus package.yaml versus a Cabal
+  file](https://docs.haskellstack.org/en/stable/stack_yaml_vs_cabal_package_file/)
+* Stack uses a tool called [hpack](https://github.com/sol/hpack) to generate
+  cabal files. I had to poke around in hpack's docs to solve some early
+  project problems. You might too.
+* ["Why is stack not
+  cabal?"](https://www.fpcomplete.com/blog/2015/06/why-is-stack-not-cabal/), a
+  good article with some historical context for the whole stack/cabal
+  situation.
+
+### A special note about `stack install`
+
+Most tutorials I found suggest that you need to `stack install` your
+dependencies. **This is false!** Adding a dependency to your `package.yaml`
+file is *all* you need to do. Running `stack build` will do the rest. I don't
+know why this rumor is so rampant.
+
+The `stack install` command does only *one* thing: it copies binaries to your
+local binary directory. That's it! Odds are you don't want to do that ever,
+except for the occasional utility that you'll use *outside of the context of
+your project*.
+
+See [this excellent section of the Stack user
+guide](https://docs.haskellstack.org/en/stable/GUIDE/#the-stack-install-command-and-copy-bins-option)
+for more information and clarity.
+
+### Stackage
+
+[Stackage](https://www.stackage.org/) seems like a great idea to me. "Stable
+Haskell package sets", or "A distribution of compatible Haskell packages from
+Hackage that build together". In short, you get a versioned set of the
+most-used Haskell packages that are known to work well together, *and* with a
+given version of GHC.
+
+By default when you `stack new` a new project, it depends on the latest LTS
+release of stackage. (You can change this by passing an arg to `stack new` or
+changing the resolver in your `stack.yaml` file. But you probably don't need
+to.)
+
+There's an LTS for every major GHC version and plenty of minor versions. In
+practice, this has worked great for me so far. The only minor downside is
+that, typically, the stackage LTS won't be on the absolute latest version of
+GHC. (Since the whole package set needs to be vetted/compatible with that
+version.) If you care, you can use one of the nightly stackage releases to get
+the latest/greatest. If it works for you, you're good to go.
+
+(You can use packages that aren't in stackage too, of course. But I haven't
+needed to yet. It's a solid foundation.)
+
+### Editor stuff
+
+VS Code works pretty damn well with Haskell *almost* out of the box. Install
+the main Haskell plugin and the Haskell syntax highlighting plugin and you're
+good. You'll need to do a *little* bit of configuring -- basically point the
+Haskell plugin to your GHCup installation, which it will use to manage the
+language server installation(s). It's an easy way to get started!
+
+Any modern vim/neovim setup will give you comparable results, with a bit more
+tweaking of course. For neovim, I recommend:
+
+* The [haskell-vim](https://github.com/neovimhaskell/haskell-vim) plugin,
+  which greatly improves syntax highlighting and indentation for Haskell over
+  the defaults that ship with vim.
+* The [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) plugin, which
+  includes predefined configs for various language servers. (Assuming you want
+  the IDE-like features the language server provides.) See [the
+  haskell-language-server
+  section](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#hls)
+  for more specific details.
+
+These plugins (or equivalent) might be just as good with (a newish version of)
+vanilla vim, but I don't know for sure. Give it a shot! YMMV.
+
+It's also worthwhile to read up on [the
+haskell-language-server](https://haskell-language-server.readthedocs.io/en/latest/features.html)
+generally. Tons of cool features, but also some limitations that are good to
+be aware of.
+
+(Hopefully it goes without saying that other editors are also probably fine. I
+just don't have direct experience. Emacs is always a cool choice. In my Scala
+days, I had pretty good luck with IntelliJ, which has a Haskell plugin. Use
+whatever works.)
+
 
 ## Pattern matching
 
