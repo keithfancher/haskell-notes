@@ -214,25 +214,27 @@ the truly "exceptional" errors/exceptions and the expected ones. The expected
 ones should be encoded in your dang type signature (`Either`, etc.) if
 possible.
 
+Related, this article builds the idea of `Either` up from scratch, shows some
+interesting example of error-handling cases:
+
+https://www.schoolofhaskell.com/school/starting-with-haskell/basics-of-haskell/10_Error_Handling
+
+### Exceptions
+
 Haskell does have "normal" exceptions, which can be caught and thrown and so
 on. See `Control.Exception`:
 
 https://hackage.haskell.org/package/base-4.17.0.0/docs/Control-Exception.html
 
-However, I don't yet grok how best to use these, if at all. I think at
-minimum, knowing how to catch/handle them is useful if you're doing IO
-operations. (For example, a file doesn't exist, a connection fails, etc.) When
-writing functions, perhaps safest to stick with `Either`? (From what I
-understand, the expectations is that any `IO` could fail with an exception,
-however. Watch out!)
+However, I don't yet grok how best to use these, if at all. I *think* the idea
+is to keep them out of pure code entirely, and only use them when dealing with
+`IO`. And related to that, the expectation seems to be that any `IO` value
+could fail with an exception. (For example, a file doesn't exist, a connection
+fails, etc.) So watch out!
 
-This SO post has some good info on the particulars of how and when to use the
-various exception-catching methods: https://stackoverflow.com/a/6009807
-
-And as a final note, this article builds up from scratch the idea of `Either`,
-shows some interesting example of error-handling cases:
-
-https://www.schoolofhaskell.com/school/starting-with-haskell/basics-of-haskell/10_Error_Handling
+As far as *catching* exceptions: this SO post has some good info on the
+particulars of how and when to use the various exception-catching methods:
+https://stackoverflow.com/a/6009807
 
 ### (Avoid) partial functions
 
