@@ -301,3 +301,82 @@ Frankly, I'm still not sure what the "right" thing to do is, overall.
 Certainly one doesn't want to always have profiling enabled. Right? (My
 current approach is to hunt down and destroy any code that *might* throw an
 error, which I guess is ideal anyway.)
+
+
+## Everyday programming tasks
+
+All the boring everyday programming stuff you need to do is possible in
+Haskell, and not any more difficult than in any other language, at least in my
+(limited!) experience.
+
+### CLI arguments
+
+For the simplest use-cases, you can just `getArgs`, which gives you back an
+`IO String`. Very easy to use in your `main`. For anything more complex than
+that, you'd likely want to use one of the many libraries available.
+
+The unfortunately named
+[optparse-applicative](https://www.stackage.org/package/optparse-applicative#quick-start)
+is probably the most widely-used. At first glance, it looks complicated (and
+it has the world "applicative" in the name), but it was actually super-simple
+to get up and running. The "quick start" (linked above) will get you a long
+way. It can handle pretty much any complex use-case you can throw at it, but
+is also great for simple stuff.
+
+[This blog
+post](https://thoughtbot.com/blog/applicative-options-parsing-in-haskell) was
+also very helpful, and has some good examples.
+
+Other resources:
+
+* [optparse-simple](https://www.stackage.org/package/optparse-simple) is built
+  on optparse-applicative, but cuts out some boilerplate for simple use-cases.
+* [cmdargs](https://hackage.haskell.org/package/cmdargs) is also popular and
+  supposedly good, but I haven't tried it!
+* [simple-get-opt](https://hackage.haskell.org/package/simple-get-opt) is
+  also, well... simple.
+* Check out this
+  [meta-list](https://wiki.haskell.org/Command_line_option_parsers) from the
+  haskell.org wiki! Good comparison of different options.
+
+### Unit testing
+
+[HUnit](https://hackage.haskell.org/package/HUnit) exists, but after a short
+trial run I ditched it. HUnit tests can wind up looking like an exaggerated
+parody of unreadable code, e.g.:
+
+```
+tests = test [ "test1" ~: "(foo 3)" ~: (1,2) ~=? (foo 3),
+               "test2" ~: do (x, y) <- partA 3
+                             assertEqual "for the first result of partA," 5 x
+                             partB y @? "(partB " ++ show y ++ ") failed" ]
+```
+
+After poking around some more, I found [Hspec](https://hspec.github.io/). It
+favors readable tests over terseness and has some other handy features, nicer
+output, and integrates well with HUnit tests if you want to mix/match.
+
+Separately, there's this odd bird called
+[QuickCheck](https://hackage.haskell.org/package/QuickCheck). You can use it
+by itself or with any other test library/framework. It does "random testing of
+program properties". A cool idea, but I haven't used it much yet.
+
+(My intuition here is that you'd have to be careful not to rewrite the logic
+of your system-under-test in order to programmatically test that system. Many
+of the examples I've seen do just that. But still seems handy!)
+
+### JSON parsing
+
+Use [Aeson](https://hackage.haskell.org/package/aeson)! (In Greek mythology,
+Aeson is the father of Jason. Get it?)
+
+### Parsing in general
+
+Use [Parsec](https://hackage.haskell.org/package/parsec). Super cool.
+
+### HTTP requests
+
+For simple stuff, (probably?) use
+[Network.HTTP.Simple](https://hackage.haskell.org/package/http-conduit-2.3.8/docs/Network-HTTP-Simple.html).
+For less simple stuff, [wreq](https://hackage.haskell.org/package/wreq)?
+However, wreq uses `lens`, which is a whole other thing to get into.
