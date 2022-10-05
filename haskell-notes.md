@@ -509,14 +509,15 @@ libraries available.
 The unfortunately named
 [optparse-applicative](https://www.stackage.org/package/optparse-applicative#quick-start)
 is probably the most widely-used. At first glance, it looks complicated (and
-it has the world "applicative" in the name), but it was actually super-simple
+it has the word "applicative" in the name), but it was actually super-simple
 to get up and running. The "quick start" (linked above) will get you a long
 way. It can handle pretty much any complex use-case you can throw at it, but
 is also great for simple stuff.
 
 [This blog
 post](https://thoughtbot.com/blog/applicative-options-parsing-in-haskell) was
-also very helpful, and has some good examples.
+also very helpful, and has some good examples of optparse-applicative in
+action.
 
 Other resources:
 
@@ -554,7 +555,7 @@ program properties". A cool idea, but I haven't used it much yet.
 
 (My intuition here is that you'd have to be careful not to rewrite the logic
 of your system-under-test in order to programmatically test that system. Many
-of the examples I've seen do just that. But still seems handy!)
+of the QuickCheck examples I've seen do just that. But still seems handy!)
 
 ### JSON parsing
 
