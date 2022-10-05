@@ -8,6 +8,35 @@ scattered collection of useful information and resources.
 audience. Apologies if I make some assumptions throughout. Also, I'm new to
 Haskell, so I'm probably wrong about everything. Sorry again!)
 
+
+## Getting started
+
+These notes won't be enough to get you started. If you're *brand* new, get
+yourself a book:
+
+* [Get Programming in
+  Haskell](https://www.manning.com/books/get-programming-with-haskell) by Will
+  Kurt. I thought this was fantastic. Great balance of theory and practice,
+  fun examples, &c. The goal is to get you fluent enough to start building
+  "weekend projects" in Haskell. (But also to understand what the hell you're
+  doing.)
+* [Programming in Haskell](https://www.cs.nott.ac.uk/~pszgmh/pih.html) by
+  Graham Hutton. Just started working through this one. Drier, but a good
+  complement to *Get Programming in Haskell*. Highly recommended by the
+  Haskell community.
+* [Haskell Programming from First Principles](https://haskellbook.com/). It's
+  a damn encyclopedia, 1200 pages. I haven't read it yet.
+* [Real World Haskell](http://book.realworldhaskell.org/). Free! But old.
+  Could be valuable, but don't start here.
+* [Learn You a Haskell](http://www.learnyouahaskell.com/). I love this book. A
+  really amazing (and also free!) reference, though it too is a bit old these
+  days. Still fantastic to read, but beware that certain info might be
+  out-of-date.
+
+Aside from books, this [CIS 194: Intro to
+Haskell](https://www.seas.upenn.edu/~cis1940/fall16/) course is supposedly a
+very good intro. And free!
+
 ## Pattern matching
 
 There are a few different pattern matching ideas in Haskell, and they tend to
