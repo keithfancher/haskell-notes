@@ -12,6 +12,36 @@ audience. Apologies if I make some assumptions throughout. Also, I'm new to
 Haskell, so I'm probably wrong about everything. Sorry again!)
 
 
+## Table of contents
+
+* [Getting started](#getting-started)
+* [Installation / Toolchain stuff](#installation--toolchain-stuff)
+  * [Initial setup](#initial-setup)
+  * [Testing it out](#testing-it-out)
+  * ["Real" projects](#real-projects)
+  * [A special note about stack install](#a-special-note-about-stack-install)
+  * [Stackage](#stackage)
+  * [Editor stuff](#editor-stuff)
+* [Pattern matching](#pattern-matching)
+  * [Function argument pattern matching and case statements](#function-argument-pattern-matching-and-case-statements)
+  * [Guards](#guards)
+  * [Pattern matching vs guards](#pattern-matching-vs-guards)
+  * [Pattern matching references](#pattern-matching-references)
+* [Monad stuff](#monad-stuff)
+  * [Some useful monads](#some-useful-monads)
+  * [Monad transformers](#monad-transformers)
+* [Error handling](#error-handling)
+  * [Exceptions](#exceptions)
+  * [(Avoid) partial functions](#avoid-partial-functions)
+  * [Stack traces?](#stack-traces)
+* [Everyday programming tasks](#everyday-programming-tasks)
+  * [CLI arguments](#cli-arguments)
+  * [Unit testing](#unit-testing)
+  * [JSON parsing](#json-parsing)
+  * [Parsing in general](#parsing-in-general)
+  * [HTTP requests](#http-requests)
+
+
 ## Getting started
 
 These notes won't be enough to get you started. If you're *brand* new, get
@@ -39,6 +69,7 @@ yourself a book:
 Aside from books, this [CIS 194: Intro to
 Haskell](https://www.seas.upenn.edu/~cis1940/fall16/) course is supposedly a
 very good intro. And free!
+
 
 ## Installation / Toolchain stuff
 
