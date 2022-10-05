@@ -341,9 +341,11 @@ Haskell, and not any more difficult than in any other language, at least in my
 
 ### CLI arguments
 
-For the simplest use-cases, you can just `getArgs`, which gives you back an
-`IO String`. Very easy to use in your `main`. For anything more complex than
-that, you'd likely want to use one of the many libraries available.
+For the simplest use-cases, you can just
+[`getArgs`](https://hackage.haskell.org/package/base-4.17.0.0/docs/System-Environment.html#v:getArgs),
+which gives you back an `IO [String]`. Very easy to use in your `main`. For
+anything more complex than that, you'd likely want to use one of the many
+libraries available.
 
 The unfortunately named
 [optparse-applicative](https://www.stackage.org/package/optparse-applicative#quick-start)
