@@ -62,8 +62,8 @@ expressions:
 
 From https://stackoverflow.com/a/40836465.
 
-Note that you can (I think?) use a combo approach: "normal" pattern matching
-as well as guards.
+Note that you can use a combo approach: "normal" pattern matching as well as
+guards.
 
 > It's also worth mentioning that since pattern guards were added to Haskell
 > 2010, you're allowed to mix patterns and guards like so:
@@ -76,8 +76,9 @@ accumulate_list' l f
    | (x:xs) <- l = undefined  --pattern for the non-empty case
 ```
 
-From: https://stackoverflow.com/a/25493823. I still don't grok this fully.
-Just noting it here for reference.
+From: https://stackoverflow.com/a/25493823. I find this pretty difficult to
+read, personally. (Or maybe this is just a bad example?)  In either case, just
+noting it here for reference.
 
 ### Pattern matching vs guards
 
