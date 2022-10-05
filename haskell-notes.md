@@ -5,7 +5,8 @@ learning Haskell. This is not meant as a comprehensive guide, but rather is a
 scattered collection of useful information and resources.
 
 (Note: I'm writing this selfishly. Primarily, *I* am the document's target
-audience. Apologies if I make some assumptions throughout.)
+audience. Apologies if I make some assumptions throughout. Also, I'm new to
+Haskell, so I'm probably wrong about everything. Sorry again!)
 
 ## Pattern matching
 
