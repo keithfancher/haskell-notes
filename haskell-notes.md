@@ -339,13 +339,12 @@ https://wiki.haskell.org/All_About_Monads
 * Maybe: obviously!
 * Either: errors!
 * IO: special magic monad which (I think?) can only be unwrapped by `main`
-* Reader: used to pass around read-only "environment" to functions
-  (https://hackage.haskell.org/package/mtl-2.3/docs/Control-Monad-Reader.html)
-  (f-sharp, but the article that made it "click" for me: https://fsharpforfunandprofit.com/posts/dependencies-3/)
-* Writer: basically used for logging, or similar operations
-  (https://hackage.haskell.org/package/mtl-2.3/docs/Control-Monad-Writer-Lazy.html)
-* State: used to pass around/isolate mutable state (read/write)
-  (https://hackage.haskell.org/package/mtl-2.3/docs/Control-Monad-State-Lazy.html)
+* [Reader](https://hackage.haskell.org/package/mtl-2.3/docs/Control-Monad-Reader.html):
+  used to pass around read-only "environment" to functions. ([This
+  article](https://fsharpforfunandprofit.com/posts/dependencies-3/) is about
+  F#'s Reader, but is still what made the concept "click" for me.)
+* [Writer](https://hackage.haskell.org/package/mtl-2.3/docs/Control-Monad-Writer-Lazy.html): basically used for logging, or similar operations
+* [State](https://hackage.haskell.org/package/mtl-2.3/docs/Control-Monad-State-Lazy.html): used to pass around/isolate mutable state (read/write)
 
 ### Monad transformers
 
@@ -411,9 +410,8 @@ https://www.schoolofhaskell.com/school/starting-with-haskell/basics-of-haskell/1
 ### Exceptions
 
 Haskell does have "normal" exceptions, which can be caught and thrown and so
-on. See `Control.Exception`:
-
-https://hackage.haskell.org/package/base-4.17.0.0/docs/Control-Exception.html
+on. See
+[`Control.Exception`](https://hackage.haskell.org/package/base-4.17.0.0/docs/Control-Exception.html).
 
 However, I don't yet grok how best to use these, if at all. I *think* the idea
 is to keep them out of pure code entirely, and only use them when dealing with
@@ -481,8 +479,9 @@ Or, another option:
 > With GHC 8.0.1 and better, just compile with the `-g` flag. No need for
 > profiling or cost centers.
 
-This enables "DWARF" support. See https://www.haskell.org/ghc/blog/20200403-dwarf-1.html
-for more information. I don't fully understand the trade-offs here yet.
+This enables "DWARF" support. See [this blog
+post](https://www.haskell.org/ghc/blog/20200403-dwarf-1.html) for more
+information. I don't fully understand the trade-offs here yet.
 
 Also, some more (general) info here: https://wiki.haskell.org/Debugging.
 
