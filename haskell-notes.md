@@ -40,6 +40,7 @@ Haskell, so I'm probably wrong about everything. Sorry again!)
   * [JSON parsing](#json-parsing)
   * [Parsing in general](#parsing-in-general)
   * [HTTP requests](#http-requests)
+  * [Working with text](#working-with-text)
 
 
 ## Getting started
@@ -602,3 +603,24 @@ For simple stuff, (probably?) use
 [Network.HTTP.Simple](https://hackage.haskell.org/package/http-conduit-2.3.8/docs/Network-HTTP-Simple.html).
 For less simple stuff, [wreq](https://hackage.haskell.org/package/wreq)?
 However, wreq uses `lens`, which is a whole other thing to get into.
+
+### Working with text
+
+It's a little counter-intuitive, but as a general rule: do **not** use
+`String` when working with text in Haskell. The `String` type is simply a
+`List` of characters, and tends to have terrible performance with text
+operations.
+
+Instead, use
+[`Data.Text`](https://hackage.haskell.org/package/text-2.0.1/docs/Data-Text.html)
+(and its related modules,
+[Data.Text.IO](https://hackage.haskell.org/package/text-2.0.1/docs/Data-Text-IO.html),
+etc.). Strict by default, performant, easy to use.
+
+It's fine (and convenient!) to use `String` while you're learning, but for
+anything "real", just stick with `Text`. Like, everywhere.
+
+(Note that the
+[`OverloadedStrings`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/overloaded_strings.html)
+language extension makes this transition pretty painless. It simply makes
+string literals in your code a bit more flexible. Recommended.)
