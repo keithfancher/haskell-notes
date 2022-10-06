@@ -240,14 +240,14 @@ The "lowest level" structure is the `case` statement. These can be used
 anywhere, not just in function definitions. For example, these two bits of
 code are equivalent:
 
-```
--- "Normal" pattern matching:
+```haskell
+-- "Normal" function arg pattern matching:
 head' :: [a] -> a
 head' [] = error "No head for empty lists!"
 head' (x:_) = x
 ```
 
-```
+```haskell
 -- case statement
 head' :: [a] -> a
 head' xs = case xs of [] -> error "No head for empty lists!"
@@ -263,7 +263,7 @@ matching is more readable and (probably) generally preferred.
 The third idea -- more of a related concept than a separate "thing" -- is to
 use guards. See this example from *LYAH*:
 
-```
+```haskell
 bmiTell :: (RealFloat a) => a -> String
 bmiTell bmi
     | bmi <= 18.5 = "You're underweight, you emo, you!"
@@ -288,7 +288,7 @@ guards.
 > It's also worth mentioning that since pattern guards were added to Haskell
 > 2010, you're allowed to mix patterns and guards like so:
 
-```
+```haskell
 accumulate_list' :: (Eq a, Num a) => [a] -> ( a -> a -> a ) -> a
 accumulate_list' l f
    | []     <- l = 0          --pattern for the empty list case
@@ -383,7 +383,7 @@ Different monads don't (always? ever?) compose nicely. For that, one needs
 monad transformers. The type class definition sums it up pretty well,
 actually:
 
-```
+```haskell
 class MonadTrans t where
   lift :: Monad m => m a -> t m a
 ```
@@ -567,7 +567,7 @@ Other resources:
 trial run I ditched it. HUnit tests can wind up looking like an exaggerated
 parody of unreadable code, e.g.:
 
-```
+```haskell
 tests = test [ "test1" ~: "(foo 3)" ~: (1,2) ~=? (foo 3),
                "test2" ~: do (x, y) <- partA 3
                              assertEqual "for the first result of partA," 5 x
