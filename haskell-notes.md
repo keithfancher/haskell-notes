@@ -236,9 +236,9 @@ my attempt to sort that out.
 
 ### Function argument pattern matching and `case` statements
 
-The "lowest level" is to use `case` statements. These can be used anywhere,
-not just in function definitions. For example, these two bits of code are
-equivalent:
+The "lowest level" structure is the `case` statement. These can be used
+anywhere, not just in function definitions. For example, these two bits of
+code are equivalent:
 
 ```
 -- "Normal" pattern matching:
