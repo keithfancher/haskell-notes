@@ -41,6 +41,7 @@ Haskell, so I'm probably wrong about everything. Sorry again!)
   * [Parsing in general](#parsing-in-general)
   * [HTTP requests](#http-requests)
   * [Working with text](#working-with-text)
+* [Miscellaneous good reads](#miscellaneous-good-reads)
 
 
 ## Getting started
@@ -624,3 +625,14 @@ anything "real", just stick with `Text`. Like, everywhere.
 [`OverloadedStrings`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/overloaded_strings.html)
 language extension makes this transition pretty painless. It simply makes
 string literals in your code a bit more flexible. Recommended.)
+
+
+## Miscellaneous good reads
+
+* [An opinionated guide to Haskell in
+  2018](https://lexi-lambda.github.io/blog/2018/02/10/an-opinionated-guide-to-haskell-in-2018/)
+  -- really good overview, context, and advice for a beginner from someone who
+  clearly has experience in the trenches. Great stuff like: "Warning flags for
+  a safe build", "Libraries: a field guide", and a whole big ol' section on
+  language extensions. Things have probably changed a bit since 2018, but I
+  still found this really valuable.
