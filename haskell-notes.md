@@ -559,7 +559,20 @@ Here's a sampling of useful extensions I've discovered so far:
   an article that goes into it a bit. Mostly, I've just used this to magically
   make my types instances of `FromJSON` and `ToJSON`.
 
-Some quality reading on the subject:
+Note that, **as of GHC 9.2.1**, there's a [`GHC2021`
+meta-extension](https://downloads.haskell.org/~ghc/9.2.1/docs/html/users_guide/exts/control.html#extension-GHC2021)
+which is enabled by default:
+
+> GHC blesses a number of extensions, beyond Haskell 2010, to be suitable to
+> turned on by default. These extensions are considered to be stable and
+> conservative.
+>
+> `GHC2021` is used by GHC if neither `Haskell98` nor `Haskell2010` is turned
+> on explicitly. Since later versions of GHC may use a later `GHC20xx` by
+> default, users are advised to declare the language set explicitly with
+> `-XGHC2021`.
+
+Some more quality reading on extensions:
 
 * [The official GHC
   docs](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts.html), which
