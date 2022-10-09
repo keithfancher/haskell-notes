@@ -34,6 +34,7 @@ Haskell, so I'm probably wrong about everything. Sorry again!)
   * [Exceptions](#exceptions)
   * [(Avoid) partial functions](#avoid-partial-functions)
   * [Stack traces?](#stack-traces)
+* [Language extensions](#language-extensions)
 * [Everyday programming tasks](#everyday-programming-tasks)
   * [CLI arguments](#cli-arguments)
   * [Unit testing](#unit-testing)
@@ -522,6 +523,54 @@ Frankly, I'm still not sure what the "right" thing to do is, overall.
 Certainly one doesn't want to always have profiling enabled. Right? (My
 current approach is to hunt down and destroy any code that *might* throw an
 error, which I guess is ideal anyway.)
+
+
+## Language extensions
+
+Language extensions seemed totally bananas to me at first. Maybe they still
+do, but I'm getting used to it. In short, as I understand it, they're simply
+"add-ons" to the official Haskell spec, which tends to be pretty conservative.
+(In theory, certain extensions might make it into the next version of the
+spec, so it's a kind of proving ground, perhaps?)
+
+In practice, being able to change the behavior of the language, more or less
+ad hoc, *somehow* doesn't cause horrible problems. And there are a handful of
+"standard" extensions that you'll see used in almost every project.
+
+One can enable extensions with a compiler flag, using `LANGUAGE` pragmas at
+the top of a given file, or for a whole project in your
+`package.yaml`/`.cabal` file. Opinions are mixed about what's the "best" way.
+(I've been doing it on a per-project basis. It's just simpler.)
+
+Here's a sampling of useful extensions I've discovered so far:
+
+* `OverloadedStrings`: string literals play well with other types,
+  specifically (for me) `Text`. This is the only extension I've used in
+  *every* project.
+* `DuplicateRecordFields`: allow definition of record types with
+  identically-named fields.
+* `NoImplicitPrelude`: don't use the default Haskell `Prelude`. Sometimes
+  handy.
+* `StrictData`: make fields of data types defined in the current module strict
+  by default. There are all kinds of trade-offs both ways, but this is a good
+  thing to know about.
+* `DeriveGeneric`: I've barely scraped the surface of this one.
+  [Here's](https://blog.ocharles.org.uk/posts/2014-12-16-derive-generic.html)
+  an article that goes into it a bit. Mostly, I've just used this to magically
+  make my types instances of `FromJSON` and `ToJSON`.
+
+Some quality reading on the subject:
+
+* [The official GHC
+  docs](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts.html), which
+  aren't so great for opinionated help but are great for reference.
+* [This big-ass guide](https://limperg.de/ghc-extensions/) from 2018, which
+  groups the extensions into "tracks" and gives some good info.
+* [The extension
+  section](https://lexi-lambda.github.io/blog/2018/02/10/an-opinionated-guide-to-haskell-in-2018/#any-flavor-you-like)
+  of the "Opinionated Guide to Haskell in 2018", which is a great overview of
+  the "good"/recommended extensions. (At least as of 2018. Not sure how much
+  has changed of late.)
 
 
 ## Everyday programming tasks
