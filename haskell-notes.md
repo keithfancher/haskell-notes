@@ -214,7 +214,7 @@ tweaking of course. For neovim, I recommend:
   the IDE-like features the language server provides.) See [the
   haskell-language-server
   section](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#hls)
-  for more specific details.
+  of the plugin's docs for more specific details.
 
 These plugins (or equivalent) might be just as good with (a newish version of)
 vanilla vim, but I don't know for sure. Give it a shot! YMMV.
