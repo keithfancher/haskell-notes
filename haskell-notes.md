@@ -677,7 +677,7 @@ operations.
 Instead, use
 [`Data.Text`](https://hackage.haskell.org/package/text-2.0.1/docs/Data-Text.html)
 (and its related modules,
-[Data.Text.IO](https://hackage.haskell.org/package/text-2.0.1/docs/Data-Text-IO.html),
+[`Data.Text.IO`](https://hackage.haskell.org/package/text-2.0.1/docs/Data-Text-IO.html),
 etc.). Strict by default, performant, easy to use.
 
 It's fine (and convenient!) to use `String` while you're learning, but for
