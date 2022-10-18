@@ -472,15 +472,19 @@ Examples of partial functions to avoid:
 * `read`, which parses a value out of a string
 * ...and probably many others
 
-See https://wiki.haskell.org/Avoiding_partial_functions for good examples of
-alternatives to these functions. A useful one which is absent from that list,
-`readMaybe`/`readEither`, which is a safe alternative to `read`:
+So what do you do instead? See [this
+article](https://wiki.haskell.org/Avoiding_partial_functions) from the Haskell
+wiki for good examples of alternatives to these functions. (Notably absent
+from that list are [`readMaybe` and
+`readEither`](https://hackage.haskell.org/package/base-4.17.0.0/docs/Text-Read.html#v:readMaybe),
+which are safe alternatives to `read`.)
 
-https://hackage.haskell.org/package/base-4.17.0.0/docs/Text-Read.html#v:readMaybe)
-
-For lists specifically, there's a `Data.List.Safe` option as well:
-
-https://hackage.haskell.org/package/listsafe-0.1.0.1/docs/Data-List-Safe.html
+For lists specifically, there's a
+[`Data.List.Safe`](https://hackage.haskell.org/package/listsafe-0.1.0.1/docs/Data-List-Safe.html)
+option as well. But I've found the
+[`Data.List.NonEmpty`](https://hackage.haskell.org/package/base-4.17.0.0/docs/Data-List-NonEmpty.html)
+type to be even more useful. It's exactly what it sounds like: a list which
+must have at least one element.
 
 And this is only somewhat-related, but there's the whole universe of "lens" to
 explore, which is likely overkill if you just need to grab an element from a
