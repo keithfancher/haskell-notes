@@ -22,6 +22,7 @@ Haskell, so I'm probably wrong about everything. Sorry again!)
   * [A special note about stack install](#a-special-note-about-stack-install)
   * [Stackage](#stackage)
   * [Editor stuff](#editor-stuff)
+  * [Static analysis](#static-analysis)
 * [Pattern matching](#pattern-matching)
   * [Function argument pattern matching and case statements](#function-argument-pattern-matching-and-case-statements)
   * [Guards](#guards)
@@ -228,6 +229,41 @@ be aware of.
 just don't have direct experience. Emacs is always a cool choice. In my Scala
 days, I had pretty good luck with IntelliJ, which has a Haskell plugin. Use
 whatever works.)
+
+### Static analysis
+
+Especially if you're a beginner, and *especially* if you don't have people
+reviewing your code, static analysis can be a big help. Suss out
+anti-patterns, teach you some common idioms, prevent common classes of bugs,
+etc.
+
+Here's what I've been using so far, all of which have been (their own brand
+of) helpful:
+
+* [hlint](https://hackage.haskell.org/package/hlint), via the
+  [haskell-language-server](https://haskell-language-server.readthedocs.io/en/latest/features.html#hlint-hints).
+  You get this for free by default if you use the language server. If not,
+  it's still worth checking out.
+* [stan](https://github.com/kowainik/stan) static analyzer. Slightly different
+  goals than hlint -- they play well together. Stan has an HLS plugin as well,
+  but I haven't tried it yet. (Note that I had to compile my projects with GHC
+  `8.10.7` to get Stan to work. This was a simple change for me, but if you
+  depend on any GHC 9.x-specific stuff, you might be out of luck?)
+* Not quite "static analysis," but: `stack build --pedantic`. Same as enabling
+  the `-Wall` and `-Werror` GHC options. Might not want to do this all the
+  time, but excellent for catching unused code and (potential) bugs. (Also see
+  [this great
+  article](https://lexi-lambda.github.io/blog/2018/02/10/an-opinionated-guide-to-haskell-in-2018/#warning-flags-for-a-safe-build)
+  for more info on good warning flags to enable.)
+
+And a special mention for
+[ormolu](https://hackage.haskell.org/package/ormolu), the zero-config code
+formatter. I also use this via the Haskell language server (it's the default
+choice for formatting), but it's easy to use as a standalone tool as well. As
+a beginner, I don't have strong (Haskell-specific) code formatting opinions,
+but I like the ormolu philosophy and, more than that, I like that it Just
+Works. (There are a million other formatters too. Choose one and use it
+consistently, is the main thing.)
 
 
 ## Pattern matching
