@@ -406,15 +406,15 @@ https://wiki.haskell.org/All_About_Monads
 
 ### Some useful monads
 
-* Maybe: obviously!
-* Either: errors!
-* IO: special magic monad which (I think?) can only be unwrapped by `main`
-* [Reader](https://hackage.haskell.org/package/mtl-2.3/docs/Control-Monad-Reader.html):
+* `Maybe`: obviously!
+* `Either`: errors!
+* `IO`: special magic monad which (I think?) can only be unwrapped by `main`
+* [`Reader`](https://hackage.haskell.org/package/mtl-2.3/docs/Control-Monad-Reader.html):
   used to pass around read-only "environment" to functions. ([This
   article](https://fsharpforfunandprofit.com/posts/dependencies-3/) is about
   F#'s Reader, but is still what made the concept "click" for me.)
-* [Writer](https://hackage.haskell.org/package/mtl-2.3/docs/Control-Monad-Writer-Lazy.html): basically used for logging, or similar operations
-* [State](https://hackage.haskell.org/package/mtl-2.3/docs/Control-Monad-State-Lazy.html): used to pass around/isolate mutable state (read/write)
+* [`Writer`](https://hackage.haskell.org/package/mtl-2.3/docs/Control-Monad-Writer-Lazy.html): basically used for logging, or similar operations
+* [`State`](https://hackage.haskell.org/package/mtl-2.3/docs/Control-Monad-State-Lazy.html): used to pass around/isolate mutable state (read/write)
 
 ### Monad transformers
 
