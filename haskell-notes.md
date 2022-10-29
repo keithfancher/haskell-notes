@@ -31,6 +31,11 @@ Haskell, so I'm probably wrong about everything. Sorry again!)
 * [Monad stuff](#monad-stuff)
   * [Some useful monads](#some-useful-monads)
   * [Monad transformers](#monad-transformers)
+     * [Using monad transformers](#using-monad-transformers)
+     * [Order of composition](#order-of-composition)
+     * [Lifting](#lifting)
+     * [Transformer libraries](#transformer-libraries)
+     * [Monad transformer resources](#monad-transformer-resources)
 * [Error handling](#error-handling)
   * [Exceptions](#exceptions)
   * [(Avoid) partial functions](#avoid-partial-functions)
@@ -418,42 +423,120 @@ https://wiki.haskell.org/All_About_Monads
 
 ### Monad transformers
 
-Different monads don't (always? ever?) compose nicely. For that, one needs
-monad transformers. The type class definition sums it up pretty well,
-actually:
+Different monads don't compose nicely. You can *nest* them (for example, an
+`IO Maybe a`), which works well at first but gets increasingly unwieldy as you
+add more layers. (And even at two layers it can be pretty annoying.)
+
+That's where *monad transformers* come in. Transformers let you nest (or
+"stack") a pile of monads together, and treat that whole composite thing
+*itself* as a single monad. It sounds complicated and scary, but in practice
+it's actually (surprisingly!) straightforward, clean, and easy.
+
+The type class for monad transformers sums them up pretty well, I think:
 
 ```haskell
 class MonadTrans t where
   lift :: Monad m => m a -> t m a
 ```
 
-Basically, it lets you wrap a monad around another monad. For example, if you
-have a function that might fail (`Either`) and which depends on some read-only
-environment (`Reader`), you can use `ReaderT` and `ExceptT` monad transformers
-to create a composite.
+They're just wrappers! That's it.
 
-> The use of monad transformers makes it very easy to define specialized
-> monads for many applications, reducing the temptation to put everything
-> possibly needed into the one and only monad hand-made for the current
-> application.
+#### Using monad transformers
+
+Generally speaking, you rarely (if ever) have to define your own
+implementations for these. All the standard monads have them defined already:
+`Maybe`, `Reader`, `Either`, etc. Usually just the name with a `T` at the end
+(`ReaderT`, e.g.). (`ExceptT` is a notable exception to this rule. No pun,
+&c.)
+
+So basically, you can just stick 'em together. For example, if you have a
+function that might fail (`Either`), which depends on some read-only
+environment (`Reader`), and which does some I/O (`IO`), you can use `ReaderT`
+and `ExceptT` monad transformers to create a composite. (Around the "core" of
+the `IO` monad. More on this below.)
+
+Then, e.g. within a `do` block, you can interact with that type as a *single
+unit* and it all pretty much works how you'd expect. I won't go too far into
+concrete examples here -- I'll leave that for the linked articles in the
+"Resources" section below.
+
+#### Order of composition
 
 **IMPORTANT NOTE:** Order matters in monad composition. The "core" (inner)
-monads come first, and they work their way out.
+monads come first, and they work their way out. So if your `ExceptT` comes
+before (i.e. further "inside" than) your `StateT`, that state effectively
+won't exist if the `ExceptT` comes back as a `Left`. A little confusing, but
+important to wrap your head around.
 
-Note that many examples I've seen start with the `Identity` monad as the
-inner-most layer. I don't (yet) fully understand this. It doesn't necessarily
-seem required?
+Technically, *any* monad can be the innermost core of your ball of
+transformers. But practically speaking, the core is usually an `IO`. And
+importantly, `IO` *must* be the core if it exists in your stack at all (as it
+can only be unwrapped by `main`).
 
-Related to the above, however, some special consideration is required when
-wrapping the `IO` monad. In short, since `IO` can *only* be unwrapped by
-`main`, it needs to be the innermost "core" of your transformer-onion. In this
-case, you're using it *instead* of `Identity`. Use the `liftIO` function to
-lift the IO computation into the currently running monad.
+You'll sometimes also see `Identity` used as the core in its place. (Mostly in
+monad transformer tutorials, because it's simple.) But this can also be a
+handy way to turn a monad *transformer* into a "regular" monad. For example,
+some folks find the error-handling mechanics of `ExceptT` better than a plain
+`Either`, so will define a type alias for `ExceptT Identity` and use that
+instead of `Either`. Or in real life, too -- the `State` monad for example, is
+simply [defined
+as](https://hackage.haskell.org/package/transformers-0.6.0.4/docs/src/Control.Monad.Trans.State.Lazy.html#State):
+
+```haskell
+type State s = StateT s Identity
+```
+
+#### Lifting
+
+You'll do a lot of `lift`ing when working with monad transformers. `lift`
+simply pulls one of the "inner" types a single layer up toward the "final"
+wrapped type. (You'll often see things like `lift . lift`, e.g., to bring a
+value "up" two layers.)
+
+There's also a specific `liftIO` function. This will lift an `IO` value *all*
+the way up the stack in a single go. Very handy.
+
+At first all this type juggling is confusing, but the patterns start to clear
+up once you've worked with them a little. And you'll find it actually *cleans
+up* your code quite a bit.
+
+#### Transformer libraries
+
+Once you've got the concept down, you'll want to actually *use* the things.
+Yet another can o' worms! Most of the info I found was 10+ years old, and the
+landscaped is ever-evolving, as you'd expect.
+
+[This SO post](https://stackoverflow.com/q/2769487) starts with a valid
+question: "which of the 9+ monad transformer libraries should I use?" The
+accepted answer is already dated, I think, but there's a lot of good context.
+
+The TL;DR (as I understand it):
+[`mtl`](https://hackage.haskell.org/package/mtl) and
+[`transformers`](https://hackage.haskell.org/package/transformers) are the two
+main contenders. As of 2011 (ish?), `mtl` *depends* on `transformers`, is
+compatible with it, and provides some "extra stuff":
+
+> `mtl` now depends on `transformers` .... So use `mtl` if you need the extra
+> goodies it has, or just import `transformers` if it has everything you need.
+
+[This haskell wiki
+page](https://wiki.haskell.org/Monad_Transformers#Shall_I_use_MTL_or_transformers.3F)
+has even more more context, though I can't speak for its up-to-date-ness.
+
+#### Monad transformer resources
 
 Good intro resources I've found on monad transformers:
 
-* http://blog.sigfpe.com/2006/05/grok-haskell-monad-transformers.html
-* https://github.com/mgrabmueller/TransformersStepByStep/blob/master/Transformers.lhs
+* [This wikibook
+  chapter](https://en.wikibooks.org/wiki/Haskell/Monad_transformers) is
+  awesome, finally cemented my understanding. I think. (Deriving your own
+  `MaybeT` was key.)
+* ["Monad Transformers Step by
+  Step"](https://github.com/mgrabmueller/TransformersStepByStep/blob/master/Transformers.lhs),
+  a really good paper that walks you through the concepts.
+* ["Grok Haskell Monad
+  Transformers"](http://blog.sigfpe.com/2006/05/grok-haskell-monad-transformers.html),
+  a wee little blog post that also does a good job of explaining things.
 
 
 ## Error handling
