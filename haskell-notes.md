@@ -466,7 +466,14 @@ concrete examples here -- I'll leave that for the linked articles in the
 monads come first, and they work their way out. So if your `ExceptT` comes
 before (i.e. further "inside" than) your `StateT`, that state effectively
 won't exist if the `ExceptT` comes back as a `Left`. A little confusing, but
-important to wrap your head around.
+important to wrap your head around:
+
+> Intuitively, the monads become "more fundamental" the further inside the
+> stack you get, and the effects of inner monads "have precedence" over the
+> effects of outer ones. Of course, this is just handwaving...
+
+(From
+[Typeclassopedia](https://wiki.haskell.org/Typeclassopedia#Standard_monad_transformers).)
 
 Technically, *any* monad can be the innermost core of your ball of
 transformers. But practically speaking, the core is usually an `IO`. And
@@ -534,6 +541,8 @@ Good intro resources I've found on monad transformers:
 * ["Monad Transformers Step by
   Step"](https://github.com/mgrabmueller/TransformersStepByStep/blob/master/Transformers.lhs),
   a really good paper that walks you through the concepts.
+* [Typeclassopedia's](https://wiki.haskell.org/Typeclassopedia#Monad_transformers)
+  "Monad Transformers" section is also very good.
 * ["Grok Haskell Monad
   Transformers"](http://blog.sigfpe.com/2006/05/grok-haskell-monad-transformers.html),
   a wee little blog post that also does a good job of explaining things.
