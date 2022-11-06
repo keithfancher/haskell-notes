@@ -743,7 +743,8 @@ is also great for simple stuff.
 [This blog
 post](https://thoughtbot.com/blog/applicative-options-parsing-in-haskell) was
 also very helpful, and has some good examples of optparse-applicative in
-action.
+action. (In particular, it has the clearest example of using sub-commands in a
+CLI app that I was able to find.)
 
 Other resources:
 
