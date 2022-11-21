@@ -546,6 +546,18 @@ Good intro resources I've found on monad transformers:
 * ["Grok Haskell Monad
   Transformers"](http://blog.sigfpe.com/2006/05/grok-haskell-monad-transformers.html),
   a wee little blog post that also does a good job of explaining things.
+* [Refactoring to a monad transformer
+  stack](https://thoughtbot.com/blog/refactoring-to-a-monad-transformer-stack)
+  is a more concrete example of how to go about using these things.
+* An overview of [what's *wrong* with using
+  them](https://github.com/haskell-effectful/effectful/blob/master/transformers.md),
+  from the authors of another effects library,
+  [effectful](https://github.com/haskell-effectful/effectful). Even if you
+  plan to continue using transformers, these are good caveats to be aware of.
+* [mtl is not a monad transformer
+  library](https://blog.jle.im/entry/mtl-is-not-a-monad-transformer-library.html),
+  a good overview of using "mtl-style", ie depending on *type classes* rather
+  than concrete monad transformers.
 
 
 ## Error handling
