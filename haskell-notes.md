@@ -79,6 +79,13 @@ Aside from books, this [CIS 194: Intro to
 Haskell](https://www.seas.upenn.edu/~cis1940/fall16/) course is supposedly a
 very good intro. And free!
 
+There's also [Write Yourself a Scheme in 48
+Hours](https://en.wikibooks.org/wiki/Write_Yourself_a_Scheme_in_48_Hours),
+which seems a bit too fast-paced for a true introduction to the language (or
+at least that's my sense of it), but is an interesting tutorial nonetheless.
+And writing your own language -- what a cool first project! (Or fifth project,
+or whatever.)
+
 
 ## Installation / Toolchain stuff
 
