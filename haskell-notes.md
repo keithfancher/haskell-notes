@@ -831,3 +831,34 @@ string literals in your code a bit more flexible. Recommended.)
   a safe build", "Libraries: a field guide", and a whole big ol' section on
   language extensions. Things have probably changed a bit since 2018, but I
   still found this really valuable.
+* [Three Layer Haskell
+  Cake](https://www.parsonsmatt.org/2018/03/22/three_layer_haskell_cake.html)
+  -- a good overview of a good approach to designing Haskell applications. See
+  also [Invert Your
+  Mocks](https://www.parsonsmatt.org/2017/07/27/inverted_mocking.html), a
+  semi-related article by the same author about factoring pure code out of
+  your impure code (among other things).
+* [The ReaderT Design
+  Pattern](https://www.fpcomplete.com/blog/2017/06/readert-design-pattern/),
+  also related to above.
+* [An overview of "tagless
+  final"](https://www.reddit.com/r/scala/comments/s6ih9p/comment/ht5z2rd/?utm_source=share&utm_medium=web2x&context=3).
+  This post is from `r/scala`, but is still applicable/useful for
+  understanding the concepts.
+* [Design patterns in
+  Haskell](http://blog.ezyang.com/2010/05/design-patterns-in-haskel/): a
+  mapping of sorts from the classic "Gang of Four" design patterns into the
+  world of functional programming. Surprisingly useful to start shifting one's
+  thinking. (Spoiler alert: "first-class functions" is the answer to so many
+  problems!)
+* [Writing a game in
+  Haskell](https://joevargas.me/blog/2018-02-28-A-Game-in-Haskell.html): a
+  great, wonderfully-detailed blog post about building an SDL-based game in
+  Haskell.
+* [Module organization guidelines for Haskell
+  projects](https://www.haskellforall.com/2021/05/module-organization-guidelines-for.html).
+  Some good opinionated best-practices.
+* [A massive SO post](https://stackoverflow.com/a/1016986) about "getting
+  started with Haskell" that goes way beyond getting started!
+* [A clear explanation](https://stackoverflow.com/a/384919) about the
+  differences between the `foldr`, `foldl`, and `foldl'` functions.
