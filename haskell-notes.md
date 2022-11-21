@@ -784,6 +784,22 @@ program properties". A cool idea, but I haven't used it much yet.
 of your system-under-test in order to programmatically test that system. Many
 of the QuickCheck examples I've seen do just that. But still seems handy!)
 
+Other resources:
+
+* [Setting up multiple test suites](https://stackoverflow.com/a/43264723) with
+  Stack. For example, unit *and* integration tests.
+* [Tasty](https://hackage.haskell.org/package/tasty), another popular Haskell
+  testing framework (which I haven't tried yet).
+* [Using types to unit-test in
+  Haskell](https://lexi-lambda.github.io/blog/2016/10/03/using-types-to-unit-test-in-haskell/)
+  -- some simple, and then some not-so-simple approaches to drawing "seams" in
+  your code for easier testing/mocking. See also [this related
+  article](https://lexi-lambda.github.io/blog/2017/06/29/unit-testing-effectful-haskell-with-monad-mock/)
+  by the same author, sort of a follow-up. Also includes an overview of their
+  `monad-mock` library.
+* [Another article](https://making.pusher.com/unit-testing-io-in-haskell/)
+  about unit-testing IO code in Haskell.
+
 ### JSON parsing
 
 Use [Aeson](https://hackage.haskell.org/package/aeson)! (In Greek mythology,
