@@ -743,6 +743,15 @@ All the boring everyday programming stuff you need to do is possible in
 Haskell, and not any more difficult than in any other language, at least in my
 (limited!) experience.
 
+In addition to the sections below, check out the [State of the Haskell
+ecosystem](https://github.com/Gabriella439/post-rfc/blob/main/sotu.md)
+document for a massive overview of how Haskell stacks up in various
+programming domains. A really good read, with a ton of useful links. And
+similarly, check out [Consider
+Haskell](https://gilmi.me/blog/post/2020/04/28/consider-haskell), a blog post
+that presents a much more succinct take on Haskell's strengths and everyday
+usability.
+
 ### CLI arguments
 
 For the simplest use-cases, you can just
