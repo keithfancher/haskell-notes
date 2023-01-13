@@ -723,6 +723,12 @@ which is enabled by default:
 > default, users are advised to declare the language set explicitly with
 > `-XGHC2021`.
 
+Although it *works* to enable `GHC2021` as an extension, it's actually
+supposed to be set as a `language` in your `package.yaml` / `.cabal` file.
+[This article](https://raehik.github.io/2022/10/07/ghc2021-in-2022.html)
+covers `GHC2021` really well, including how to enable it and info about some
+other useful extensions that didn't make the cut.
+
 Some more quality reading on extensions:
 
 * [The official GHC
