@@ -833,6 +833,21 @@ Other resources:
 Use [Aeson](https://hackage.haskell.org/package/aeson)! (In Greek mythology,
 Aeson is the father of Jason. Get it?)
 
+Some good Aeson resources:
+
+* [This
+  cheat sheet](https://williamyaoh.com/posts/2019-10-19-a-cheatsheet-to-json-handling.html)
+  succinctly covers just about every use-case you could imagine.
+* [A good introduction](https://www.fpcomplete.com/haskell/library/aeson/)
+  from FPComplete.
+* [Another fantastic cheat sheet](https://stackoverflow.com/a/40491001), this
+  time about converting among `String`, `Text`, and `ByteString` -- the lazy
+  *and* strict varieties. (Aeson uses lazy `ByteString`, so this winds up being
+  handy/necessary.)
+* [Easy JSON in Haskell](https://blog.drewolson.org/easy-json), a good lil
+  intro to `lens-aeson`. If you have to wrangle some deeply-nested stuff,
+  seems like the way to go.
+
 ### Parsing in general
 
 Use [Parsec](https://hackage.haskell.org/package/parsec). Super cool.
