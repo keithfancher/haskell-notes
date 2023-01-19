@@ -43,6 +43,8 @@ Haskell, so I'm probably wrong about everything. Sorry again!)
 * [Language extensions](#language-extensions)
 * [Everyday programming tasks](#everyday-programming-tasks)
   * [CLI arguments](#cli-arguments)
+     * [A special note on variable-length argument lists](#a-special-note-on-variable-length-argument-lists) 
+     * [Other libraries](#other-libraries)
   * [Unit testing](#unit-testing)
   * [JSON parsing](#json-parsing)
   * [Parsing in general](#parsing-in-general)
@@ -781,7 +783,26 @@ also very helpful, and has some good examples of optparse-applicative in
 action. (In particular, it has the clearest example of using sub-commands in a
 CLI app that I was able to find.)
 
-Other resources:
+#### A special note on variable-length argument lists
+
+In the
+[Arguments](https://www.stackage.org/package/optparse-applicative#arguments)
+section of the optparse-applicative docs, you'll see a lightning-fast
+explanation of the `some` and `many` combinators. This was not clear to me at
+all from the docs, but:
+
+* `some`: used for *one* or more arguments
+* `many`: used for *zero* or more arguments
+
+Also, a very important note: **do not** use `some` or `many` in conjunction
+with `value` (which sets the default value for an option). If you do, your
+program will simply hang. (The only place I've seen this specifically
+mentioned is in [this
+comment](https://stackoverflow.com/questions/34889516/optparse-applicative-option-with-multiple-values/34894035#comment102633514_34894035)
+on a related S.O. answer. Not sure why this isn't loudly called out in the
+docs.)
+
+#### Other libraries
 
 * [optparse-simple](https://www.stackage.org/package/optparse-simple) is built
   on optparse-applicative, but cuts out some boilerplate for simple use-cases.
