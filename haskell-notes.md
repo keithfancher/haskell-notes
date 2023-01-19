@@ -46,6 +46,7 @@ Haskell, so I'm probably wrong about everything. Sorry again!)
   * [Unit testing](#unit-testing)
   * [JSON parsing](#json-parsing)
   * [Parsing in general](#parsing-in-general)
+  * [Time and dates](#time-and-dates)
   * [HTTP requests](#http-requests)
   * [Working with text](#working-with-text)
 * [Miscellaneous good reads](#miscellaneous-good-reads)
@@ -857,6 +858,20 @@ Some good Aeson resources:
 ### Parsing in general
 
 Use [Parsec](https://hackage.haskell.org/package/parsec). Super cool.
+
+### Time and dates
+
+Use the [`time`](https://hackage.haskell.org/package/time-1.9.2) library. The
+[Quick
+Start](https://hackage.haskell.org/package/time-1.9.2/docs/Data-Time.html)
+from its docs is a really useful big-picture overview of the types involved,
+should get you pretty far.
+(TL;DR: The `UTCTime` type is your bread-and-butter.)
+
+Other than the official docs, [this
+article](https://two-wrongs.com/haskell-time-library-tutorial) gives a
+fantastic overview / cheat-sheet of common date-time tasks and how to
+accomplish them.
 
 ### HTTP requests
 
