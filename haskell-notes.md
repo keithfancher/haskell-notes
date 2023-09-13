@@ -84,10 +84,16 @@ very good intro. And free!
 
 There's also [Write Yourself a Scheme in 48
 Hours](https://en.wikibooks.org/wiki/Write_Yourself_a_Scheme_in_48_Hours),
-which seems a bit too fast-paced for a true introduction to the language (or
-at least that's my sense of it), but is an interesting tutorial nonetheless.
-And writing your own language -- what a cool first project! (Or fifth project,
-or whatever.)
+which aims to be an introduction to Haskell. However, the more I learn about
+Haskell, the more I'd hesitate to recommend this tutorial to a beginner. Aside
+from being extremely fast-paced in its explanations, its code also tends to be
+quite ugly. (Not super well-factored, filled with confusing "magical"
+one-liners, lots of partial functions and incomplete pattern-matches, etc.)
+
+Still, it's an interesting tutorial nonetheless. And writing your own language
+-- what a cool first project! (Or fifth project, or whatever.) It might be a
+good exercise for an intermediate Haskeller to go through and clean up the
+code themselves...
 
 
 ## Installation / Toolchain stuff
