@@ -886,6 +886,18 @@ Some good Aeson resources:
 
 Use [Parsec](https://hackage.haskell.org/package/parsec). Super cool.
 
+* The [`Text.Parsec`](https://hackage.haskell.org/package/parsec-3.1.16.1/docs/Text-Parsec.html)
+  package docs are a great place to start.
+* You'll use the [`Text.Parsec.Char`](https://hackage.haskell.org/package/parsec-3.1.16.1/docs/Text-Parsec-Char.html)
+  character parsers a lot.
+* [Intro to Parsing with Parsec](http://jakewheat.github.io/intro_to_parsing/)
+  was also quite useful. It's packed with examples, and I really like how the
+  author shows how to write equivalent parsers in several different styles.
+* [Write Yourself a Scheme](https://en.wikibooks.org/wiki/Write_Yourself_a_Scheme_in_48_Hours/Parsing)
+  naturally includes a section on parsing. However, it uses the legacy
+  `parsec-2` API. Also, its code might not be the best example to follow,
+  generally speaking. Still: it never hurts to see more examples!
+
 ### Time and dates
 
 Use the [`time`](https://hackage.haskell.org/package/time-1.9.2) library. The
