@@ -22,6 +22,9 @@ Haskell, so I'm probably wrong about everything. Sorry again!)
   * [A special note about stack install](#a-special-note-about-stack-install)
   * [Stackage](#stackage)
   * [Editor stuff](#editor-stuff)
+     * [VS Code](#vs-code)
+     * [Neovim](#neovim)
+     * [Other editors](#other-editors)
   * [Static analysis](#static-analysis)
 * [Pattern matching](#pattern-matching)
   * [Function argument pattern matching and case statements](#function-argument-pattern-matching-and-case-statements)
@@ -219,11 +222,26 @@ needed to yet. It's a solid foundation.)
 
 ### Editor stuff
 
-VS Code works pretty damn well with Haskell *almost* out of the box. Install
-the main Haskell plugin and the Haskell syntax highlighting plugin and you're
-good. You'll need to do a *little* bit of configuring -- basically point the
-Haskell plugin to your GHCup installation, which it will use to manage the
-language server installation(s). It's an easy way to get started!
+Odds are you can use your favorite text editor and it'll work just fine! And
+thanks to the magic of the [language server
+protocol](https://microsoft.github.io/language-server-protocol/) generally, and the
+[haskell-language-server](https://haskell-language-server.readthedocs.io/en/latest/features.html)
+specifically, you can get pretty close to a full IDE experience, if you're
+into that kind of thing.
+
+#### VS Code
+
+VS Code works pretty damn well with Haskell *almost* out of the box. Install:
+
+* the main Haskell plugin and
+* the Haskell syntax highlighting plugin
+
+...and you're good. You'll need to do a *little* bit of configuring --
+basically point the Haskell plugin to your GHCup installation, which it will
+use to manage the language server installation(s). It's an easy way to get
+started!
+
+#### Neovim
 
 Any modern vim/neovim setup will give you comparable results, with a bit more
 tweaking of course. For neovim, I recommend:
@@ -247,15 +265,12 @@ tweaking of course. For neovim, I recommend:
 These plugins (or equivalent) might be just as good with (a newish version of)
 vanilla vim, but I don't know for sure. Give it a shot! YMMV.
 
-It's also worthwhile to read up on [the
-haskell-language-server](https://haskell-language-server.readthedocs.io/en/latest/features.html)
-generally. Tons of cool features, but also some limitations that are good to
-be aware of.
+#### Other editors
 
-(Hopefully it goes without saying that other editors are also probably fine. I
+Hopefully it goes without saying that other editors are also probably fine. I
 just don't have direct experience. Emacs is always a cool choice. In my Scala
 days, I had pretty good luck with IntelliJ, which has a Haskell plugin. Use
-whatever works.)
+whatever works.
 
 ### Static analysis
 
