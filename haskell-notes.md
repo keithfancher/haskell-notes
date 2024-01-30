@@ -46,7 +46,7 @@ Haskell, so I'm probably wrong about everything. Sorry again!)
 * [Language extensions](#language-extensions)
 * [Everyday programming tasks](#everyday-programming-tasks)
   * [CLI arguments](#cli-arguments)
-     * [A special note on variable-length argument lists](#a-special-note-on-variable-length-argument-lists) 
+     * [A special note on variable-length argument lists](#a-special-note-on-variable-length-argument-lists)
      * [Other libraries](#other-libraries)
   * [Unit testing](#unit-testing)
   * [JSON parsing](#json-parsing)
@@ -54,6 +54,7 @@ Haskell, so I'm probably wrong about everything. Sorry again!)
   * [Time and dates](#time-and-dates)
   * [HTTP requests](#http-requests)
   * [Working with text](#working-with-text)
+  * [Debugging](#debugging)
 * [Miscellaneous good reads](#miscellaneous-good-reads)
 
 
@@ -964,6 +965,40 @@ anything "real", just stick with `Text`. Like, everywhere.
 [`OverloadedStrings`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/overloaded_strings.html)
 language extension makes this transition pretty painless. It simply makes
 string literals in your code a bit more flexible. Recommended.)
+
+### Debugging
+
+So far, all of my debugging needs have been met by the venerable
+[`Debug.Trace`](https://hackage.haskell.org/package/base-4.14.0.0/docs/Debug-Trace.html)
+package. It's a continuation of the time-honored tradition known to some as
+"printf debugging". It's simple and effective!
+
+You may be thinking: what about pure functions? Fantastically, it still Just
+Works:
+
+> The `trace` function should only be used for debugging, or for monitoring
+> execution. **The function is not referentially transparent**: its type
+> indicates that it is a pure function but it has the side effect of
+> outputting the trace message.
+
+(Emphasis mine.)
+
+For something more interactive, the [GHCi
+debugger](https://downloads.haskell.org/~ghc/9.4-latest/docs/users_guide/ghci.html#the-ghci-debugger)
+looks pretty cool, but I've yet to try it.
+
+Some related resources:
+
+* [A guide to debugging](https://wiki.haskell.org/Debugging) from the
+  haskell.org wiki.
+* A section from the GHCi debugger docs about [debugging
+  exceptions](https://downloads.haskell.org/~ghc/9.4-latest/docs/users_guide/ghci.html#debugging-exceptions).
+* Some more [debugging tips and
+  tricks](https://haskell.dev/article/Debugging_and_testing_in_Haskell_Tips_and_tricks.html).
+* A [StackOverflow
+  post](https://stackoverflow.com/questions/6724434/how-to-debug-haskell-code)
+  with a ton of useful resources and advice. (Look at all the answers, not
+  just the accepted one.)
 
 
 ## Miscellaneous good reads
