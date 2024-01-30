@@ -237,6 +237,12 @@ tweaking of course. For neovim, I recommend:
   haskell-language-server
   section](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#hls)
   of the plugin's docs for more specific details.
+* The [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+  plugin, which makes it dead-simple to use fancy newfangled
+  [Tree-sitter](https://tree-sitter.github.io/tree-sitter/) parsers for
+  Haskell (or any other supported language). Tree-sitter offers a bunch of cool
+  benefits which are worth looking into, but at the bare minimum it provides
+  *much* improved syntax highlighting. It's great.
 
 These plugins (or equivalent) might be just as good with (a newish version of)
 vanilla vim, but I don't know for sure. Give it a shot! YMMV.
