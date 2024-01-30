@@ -265,11 +265,15 @@ of) helpful:
   [haskell-language-server](https://haskell-language-server.readthedocs.io/en/latest/features.html#hlint-hints).
   You get this for free by default if you use the language server. If not,
   it's still worth checking out.
-* [stan](https://github.com/kowainik/stan) static analyzer. Slightly different
-  goals than hlint -- they play well together. Stan has an HLS plugin as well,
-  but I haven't tried it yet. (Note that I had to compile my projects with GHC
-  `8.10.7` to get Stan to work. This was a simple change for me, but if you
-  depend on any GHC 9.x-specific stuff, you might be out of luck?)
+* [stan](https://github.com/kowainik/stan), an opinionated static analyzer
+  which occasionally gives *slightly* controversial advice. Very valuable for
+  a beginner! Not necessarily because you need to blindly follow every hint it
+  offers, but because it will surface potential issues you didn't even know
+  existed. (For example, it never occurred to me that `length` could be a
+  partial function! But, I'm also not used to dealing with infinite lists...)
+  Like hlint, Stan can be used as a standalone CLI tool or as a plugin for the
+  Haskell Language Server (though it may be disabled by default, depending on
+  your HLS version).
 * Not quite "static analysis," but: `stack build --pedantic`. Same as enabling
   the `-Wall` and `-Werror` GHC options. Might not want to do this all the
   time, but excellent for catching unused code and (potential) bugs. (Also see
