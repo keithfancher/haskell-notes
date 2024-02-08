@@ -55,6 +55,7 @@ Haskell, so I'm probably wrong about everything. Sorry again!)
   * [HTTP requests](#http-requests)
   * [Working with text](#working-with-text)
   * [Debugging](#debugging)
+  * [Concurrency](#concurrency)
 * [Miscellaneous good reads](#miscellaneous-good-reads)
 
 
@@ -999,6 +1000,23 @@ Some related resources:
   post](https://stackoverflow.com/questions/6724434/how-to-debug-haskell-code)
   with a ton of useful resources and advice. (Look at all the answers, not
   just the accepted one.)
+
+### Concurrency
+
+[Software transactional memory](https://hackage.haskell.org/package/stm) is
+pretty magical. Give it a shot.
+
+* [A good intro to
+  STM](https://www.schoolofhaskell.com/school/advanced-haskell/beautiful-concurrency/1-introduction),
+  but which also assumes you don't know any Haskell. Still, easy to skim the
+  "what's this monad stuff" parts to get to the meat.
+* [An even briefer intro to
+  STM](http://computationalthoughts.blogspot.com/2008/03/some-examples-of-software-transactional.html)
+  with some decent examples.
+* Be sure to check out the [Single-machine
+  Concurrency](https://github.com/Gabriella439/post-rfc/blob/main/sotu.md#single-machine-concurrency)
+  section of the "State of the Haskell ecosystem" doc. Great explanation and
+  links to plenty of other great resources.
 
 
 ## Miscellaneous good reads
