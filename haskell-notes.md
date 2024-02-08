@@ -1010,6 +1010,11 @@ Some related resources:
   a safe build", "Libraries: a field guide", and a whole big ol' section on
   language extensions. Things have probably changed a bit since 2018, but I
   still found this really valuable.
+* [State of the Haskell ecosystem](https://github.com/Gabriella439/post-rfc/blob/main/sotu.md),
+  which I've mentioned a few other times in this document ('cause it's great).
+  A really useful way to discover libraries and problem-solving approaches in
+  Haskell. Hasn't been updated in a couple years, but I don't know if it needs
+  to be.
 * [Three Layer Haskell
   Cake](https://www.parsonsmatt.org/2018/03/22/three_layer_haskell_cake.html)
   -- a good overview of a good approach to designing Haskell applications. See
