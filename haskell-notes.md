@@ -40,7 +40,8 @@ Haskell, so I'm probably wrong about everything. Sorry again!)
      * [Using monad transformers](#using-monad-transformers)
      * [Order of composition](#order-of-composition)
      * [Lifting](#lifting)
-     * [Transformer libraries](#transformer-libraries)
+     * [Monad transformer libraries](#monad-transformer-libraries)
+     * [mtl and transformer type classes](#mtl-and-transformer-type-classes)
      * [Monad transformer resources](#monad-transformer-resources)
 * [Error handling](#error-handling)
   * [Exceptions](#exceptions)
@@ -501,10 +502,27 @@ environment (`Reader`), and which does some I/O (`IO`), you can use `ReaderT`
 and `ExceptT` monad transformers to create a composite. (Around the "core" of
 the `IO` monad. More on this below.)
 
-Then, e.g. within a `do` block, you can interact with that type as a *single
-unit* and it all pretty much works how you'd expect. I won't go too far into
-concrete examples here -- I'll leave that for the linked articles in the
-"Resources" section below.
+*How* do you stick 'em together? One way would be just to use a `type` alias,
+e.g.:
+
+```haskell
+type TripleMonad a = MaybeT (ReaderT Env IO) a
+```
+
+But more commonly you'll see folks hide away the messy details behind a
+`newtype`, something closer to this:
+
+```haskell
+newtype MyApp a = MyA {
+    runA :: ReaderT AppConfig (StateT AppState IO) a
+} deriving (Monad, MonadIO, MonadReader AppConfig, MonadState AppState)
+```
+
+Then, e.g. within a `do` block, you can interact with that type (`TripleMonad`
+or `MyApp`, in these cases) as a *single unit* and it all pretty much works
+how you'd expect. (With the caveat of having to "lift" certain functions to
+the correct layer of the stack, which we'll get into in the "Lifting" section
+below.)
 
 #### Order of composition
 
@@ -516,7 +534,7 @@ important to wrap your head around:
 
 > Intuitively, the monads become "more fundamental" the further inside the
 > stack you get, and the effects of inner monads "have precedence" over the
-> effects of outer ones. Of course, this is just handwaving...
+> effects of outer ones.
 
 (From
 [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia#Standard_monad_transformers).)
@@ -551,34 +569,96 @@ the way up the stack in a single go. Very handy.
 
 At first all this type juggling is confusing, but the patterns start to clear
 up once you've worked with them a little. And you'll find it actually *cleans
-up* your code quite a bit.
+up* your code quite a bit. ([Real World
+Haskell](https://book.realworldhaskell.org/read/monad-transformers.html)
+wisely recommends wrapping your `lift`s in functions for readability and ease
+of refactoring.)
 
-#### Transformer libraries
+However, there's an *even easier way* to use monad transformers, one that's
+less brittle and doesn't depend on a specific ordering of transformers. We'll
+get into that when we talk about `mtl` below.
+
+#### Monad transformer libraries
 
 Once you've got the concept down, you'll want to actually *use* the things.
-Yet another can o' worms! Most of the info I found was 10+ years old, and the
-landscaped is ever-evolving, as you'd expect.
+Yet another can o' worms! Most of the info I found was 10+ years old, and a
+lot has changed since then.
 
 [This SO post](https://stackoverflow.com/q/2769487) starts with a valid
-question: "which of the 9+ monad transformer libraries should I use?" The
-accepted answer is already dated, I think, but there's a lot of good context.
+question: "which of the 9+ monad transformer libraries should I use?" (The
+accepted answer is already quite out of date, but there's some good context in
+there if you're curious how things *used* to be.)
 
-The TL;DR (as I understand it):
-[`mtl`](https://hackage.haskell.org/package/mtl) and
-[`transformers`](https://hackage.haskell.org/package/transformers) are the two
-main contenders. As of 2011 (ish?), `mtl` *depends* on `transformers`, is
-compatible with it, and provides some "extra stuff":
+The TL;DR (as I understand it, as of Feb 2024) is:
 
-> `mtl` now depends on `transformers` .... So use `mtl` if you need the extra
-> goodies it has, or just import `transformers` if it has everything you need.
+- There are two main libraries:
+  [`transformers`](https://hackage.haskell.org/package/transformers) and
+  [`mtl`](https://hackage.haskell.org/package/mtl).
+- `transformers` provides the *concrete* monad transformer types (stuff like
+  `ReaderT`, `MaybeT`, etc.).
+- `mtl` depends on `transformers`, and extends it to add some "extra stuff".
+  Namely, type classes, which I'll talk more about below.
+- The two libraries used to be at odds, somewhat, so you'll find a lot of
+  **outdated** information talking about one "versus" the other. (And all the
+  other now-defunct monad transformer libs.) **You can ignore all this
+  stuff**, unless you're curious about historical context.
 
-[This haskell wiki
-page](https://wiki.haskell.org/Monad_Transformers#Shall_I_use_MTL_or_transformers.3F)
-has even more more context, though I can't speak for its up-to-date-ness.
+So to tie things back together: everything we've talked about in the previous
+monad transformer sections is contained in the `transfomers` library. However,
+the "extra stuff" provided by `mtl` can make them even easier to work with.
+
+We'll talk about `mtl` more next!
+
+#### mtl and transformer type classes
+
+The `mtl` library provides *type classes* for monad transformers. Why does
+this matter to us? Well, if you're coming from the OOP world, think of it this
+way: why is it better to depend on an *interface* rather than a concrete
+class? It's pretty much the same thing here: loose coupling, more flexibility,
+easier refactoring, depending only on the behaviors that you need. Etc.
+
+And practically speaking: a lot less `lift`ing!
+
+To quote [Monday Morning Haskell](https://mmhaskell.com/monads/transformers#typeclasses):
+
+> ...there are some typeclasses which allow you to make certain assumptions
+> about the monad stack below. For instance, you often don't care what the
+> exact stack is, but you just need `IO` to exist somewhere on the stack. This
+> is the purpose of the `MonadIO` typeclass....
+>
+> We can use this behavior to get a function to print even when we don't know
+> its exact monad:
+
+```haskell
+debugFunc :: (MonadIO m) => String -> m ()
+debugFunc input = liftIO $ putStrLn ("Successfully produced input: " ++ input)
+```
+
+Thanks to the `MonadIO` type class (provided by the `mtl` lib), the above
+function would work with *any* of the concrete monad transformer types we
+defined above. Or with *any other concrete transformer stack* that contains
+`IO`. (Which is pretty much all of them.)
+
+This level of abstraction lets you add or remove layers from your transformer
+stack without having to change *anything* in related functions.
+
+And of course you can mix and match:
+
+```haskell
+readLatestLogFile :: (MonadIO m, MonadError Error m) => m [RenameOp]
+```
+
+The above function depends on having something `IO`-like and `Either`-like.
+But beyond that, it doesn't care about the concrete monad type. Cool!
+
+The only downside to this style that I've found is that your function
+signatures can get a little unwieldy if you're sticking together too many of
+these behaviors. (But that might be a sign you need to break things up a bit
+anyway.)
 
 #### Monad transformer resources
 
-Good intro resources I've found on monad transformers:
+Good intro resources I've found on general monad transformer *concepts*:
 
 * [This wikibook
   chapter](https://en.wikibooks.org/wiki/Haskell/Monad_transformers) is
@@ -592,6 +672,18 @@ Good intro resources I've found on monad transformers:
 * ["Grok Haskell Monad
   Transformers"](http://blog.sigfpe.com/2006/05/grok-haskell-monad-transformers.html),
   a wee little blog post that also does a good job of explaining things.
+* [Real World
+  Haskell](https://book.realworldhaskell.org/read/monad-transformers.html)'s
+  chapter on monad transformers is a great read for concepts and *some*
+  practical stuff, but it's fairly out of date, so beware!
+
+And some resources more on the practical side, libraries and tips for *using*
+transformers:
+
+* [Monday Morning Haskell](https://mmhaskell.com/monads/transformers)'s post
+  on monad transformers.
+* [FPComplete](https://www.fpcomplete.com/haskell/tutorial/monad-transformers/)'s
+  giant post on the subject, which of course has a *lot* of info.
 * [Refactoring to a monad transformer
   stack](https://thoughtbot.com/blog/refactoring-to-a-monad-transformer-stack)
   is a more concrete example of how to go about using these things.
