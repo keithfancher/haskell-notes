@@ -7,6 +7,9 @@ This is not meant as a comprehensive guide, but rather is a scattered
 collection of useful information and resources. These notes cover some
 meta/toolchain stuff as well aspects of the language itself.
 
+This is a living document -- I'll update it as my understanding of a concept
+solidifies, or if something relevant changes.
+
 (Note: I'm writing this selfishly. Primarily, *I* am the document's target
 audience. Apologies if I make some assumptions throughout. Also, I'm new to
 Haskell, so I'm probably wrong about everything. Sorry again!)
