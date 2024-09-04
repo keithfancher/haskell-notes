@@ -307,7 +307,10 @@ of) helpful:
   time, but excellent for catching unused code and (potential) bugs. (Also see
   [this great
   article](https://lexi-lambda.github.io/blog/2018/02/10/an-opinionated-guide-to-haskell-in-2018/#warning-flags-for-a-safe-build)
-  for more info on good warning flags to enable.)
+  for more info on good warning flags to enable. (Though [as of
+  2022](https://github.com/commercialhaskell/stack-templates/commit/f87a30e61536ca604fafe115665e93f1bbbc734f),
+  the default project you get via `stack new` already contains the recommended
+  flags. Nice!))
 
 And a special mention for
 [ormolu](https://hackage.haskell.org/package/ormolu), the zero-config code
