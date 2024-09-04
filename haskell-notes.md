@@ -26,6 +26,10 @@ Haskell, so I'm probably wrong about everything. Sorry again!)
   * ["Real" projects](#real-projects)
   * [A special note about stack install](#a-special-note-about-stack-install)
   * [Stackage](#stackage)
+  * [One big fat Stack caveat: HLS issues](#one-big-fat-stack-caveat-hls-issues)
+     * [Symptoms of the problem](#symptoms-of-the-problem)
+     * [Resolving / working around Stack+HLS issues](#resolving--working-around-stackhls-issues)
+     * [Further reading about these issues](#further-reading-about-these-issues)
   * [Editor stuff](#editor-stuff)
      * [VS Code](#vs-code)
      * [Neovim](#neovim)
@@ -177,6 +181,12 @@ I'm not going to go too in-depth here. I highly recommend *Get Programming in
 Haskell*, which uses Stack for all the projects in the latter half of the book
 and provides some great insight throughout.
 
+**NOTE:** Before you get too deep with Stack, you should be aware of [one very
+important caveat related to the Haskell Language Server](#one-big-fat-stack-caveat-hls-issues).
+This may ultimately influence your decision to go with Stack or Cabal as a
+build system for your future projects. (That said, it shouldn't stop you with
+playing around with Stack for now.)
+
 Some other useful stuff:
 
 * [The Stack intro user guide](https://docs.haskellstack.org/en/stable/tutorial/)
@@ -228,6 +238,99 @@ the latest/greatest. If it works for you, you're good to go.
 
 (You can use packages that aren't in stackage too, of course. But I haven't
 needed to yet. It's a solid foundation.)
+
+### One big fat Stack caveat: HLS issues
+
+I've wholeheartedly recommended Stack [above](#real-projects), and there's a
+good reason: it's a fantastic tool. **HOWEVER,** there is one major caveat
+which bears mentioning:
+
+**You will run into occasional, annoying issues with the Haskell Language
+Server when working on Stack projects. These issues do *not* occur with Cabal
+projects.** This may influence your decision to go with Stack or Cabal as your
+build tool of choice.
+
+Specifically, you'll notice these issues when working in Stack projects with
+multiple "components". For example, the default Stack projects contains
+components for `lib` (aka `src`), `app`, and `test`.
+
+(**Note:** If you're just getting started and don't want to get into the weeds
+yet, feel free to [skip to the next section](#editor-stuff) of the doc!)
+
+#### Symptoms of the problem
+
+You will find at times that updates you've made in one component will *not* be
+reflected in other components, according to HLS. (For example, if you've added
+a field to a data type in `src`, HLS will *not* complain if that field is
+still missing in source files within `app` and `test`.)
+
+The compiler (and therefore `stack build`, etc.) will still detect and
+complain about these changes. The issue is solely within your editor, due to
+[various communication issues](https://github.com/commercialhaskell/stack/issues/6154)
+between HLS and Stack which have yet to be resolved.
+
+In other cases, you might spot mysterious errors at the top of some source
+files (things like `failed to load packages, cannot satisfy -package
+<main-lib>`, for example). These errors will prevent HLS from working in the
+given file. Alternatively, you may simply notice HLS not working at all, but
+without displaying any errors.
+
+The root of all these issues is the same, and thankfully, the workarounds are
+also all the same.
+
+#### Resolving / working around Stack+HLS issues
+
+Apologies for the wishy-washy nature of these instructions. It's not 100%
+clear to me why *some* of these steps work only *some* of the time.
+
+1. Run `stack build` and restart the language server. (There's a command to
+   "Restart Language Server" in VS Code. In neovim, the command is
+   `:LspRestart`.) You may or may not need to `stack clean`, or even `stack
+   purge`, beforehand. Note that if your code is in a bad state, you **may
+   need to fix compilation errors so it can successfully build** before the
+   above will work. This is especially annoying to do without a working
+   language server :(
+2. If that doesn't work, try [clearing the HLS build
+   cache](https://haskell-language-server.readthedocs.io/en/latest/troubleshooting.html#clearing-hls-s-build-cache),
+   then repeating the above steps. (TL;DR: `rm -rf ~/.cache/hie-bios/`)
+3. If *that* doesn't work, try the above steps, but additionally restart your
+   editor as well, not just the language server.
+
+You may find it easiest to just do all three steps right off the bat, as I do,
+for the most consistent results. But note that the issue will occur again in
+the future as your code changes, and you'll need to repeat the above steps.
+
+**Bonus setup steps, which *might* help lessen these issues moving forward:**
+
+1. Use a locally-compiled version of HLS, built with the same GHC version as
+   your project. See [the HLS docs](https://haskell-language-server.readthedocs.io/en/latest/troubleshooting.html#static-binaries)
+   for more details. GHCup makes this very easy! (e.g. `ghcup compile hls -v
+   2.9.0.0 --ghc 9.6.5`)
+2. Provide an explicit `hie.yaml` file in your project. To start with, this
+   can be as simple as:
+   ```yaml
+   cradle:
+     stack:
+   ```
+   Again, see [the HLS docs](https://haskell-language-server.readthedocs.io/en/latest/configuration.html#examples-of-explicit-hie-yaml-configurations)
+   for more details. (Note that for at least one of my projects, this was not
+   sufficient. See [the comments in my hie.yaml](https://github.com/keithfancher/tvmv/blob/master/hie.yaml)
+   file for more details.)
+3. Use Cabal instead of Stack. I personally prefer the UX of Stack, but, at
+   least for now, the HLS integration with Cabal is tighter and these issues
+   don't occur. If you'd like to try migrating an existing project from Stack
+   to Cabal, there's [a handy tool](https://github.com/hasufell/stack2cabal)
+   that makes it very straightforward.
+
+#### Further reading about these issues
+
+- [HLS troubleshooting page](https://haskell-language-server.readthedocs.io/en/latest/troubleshooting.html#problems-with-multi-component-support-using-stack):
+  "Problems with multi component support using stack".
+- [Stack github issue](https://github.com/commercialhaskell/stack/issues/6154): "Improve stack support for HLS".
+- [HLS github issue](https://github.com/haskell/haskell-language-server/issues/366) for the same problem.
+- Various other semi-related github issues: [HLS#735](https://github.com/haskell/haskell-language-server/issues/735), [HLS#3932](https://github.com/haskell/haskell-language-server/issues/3923), [HLS#3738](https://github.com/haskell/haskell-language-server/issues/3738).
+- [A related Reddit thread](https://www.reddit.com/r/haskell/comments/yr09pb/hls_stack_bizarre_redherring_error_about_ghcide/): "HLS + Stack = bizarre red-herring error about ghcide versions".
+- [A related discussion on the Haskell Discourse](https://discourse.haskell.org/t/stack-and-hls-questions-about-the-present-and-future/10275): "Stack and HLS, questions about the present and future".
 
 ### Editor stuff
 
