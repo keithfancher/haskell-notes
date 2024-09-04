@@ -1,5 +1,7 @@
 # Learn Me a Haskell, Finally
 
+**(or: Notes of a Haskell Beginner)**
+
 Notes about things I keep forgetting, or continue to find confusing, while
 learning Haskell.
 
