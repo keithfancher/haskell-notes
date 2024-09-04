@@ -61,6 +61,7 @@ Haskell, so I'm probably wrong about everything. Sorry again!)
   * [Debugging](#debugging)
   * [Concurrency](#concurrency)
 * [Miscellaneous good reads](#miscellaneous-good-reads)
+* [Document meta](#document-meta)
 
 
 ## Getting started
@@ -1159,3 +1160,10 @@ pretty magical. Give it a shot.
   started with Haskell" that goes way beyond getting started!
 * [A clear explanation](https://stackoverflow.com/a/384919) about the
   differences between the `foldr`, `foldl`, and `foldl'` functions.
+
+
+## Document meta
+
+[This document](https://github.com/keithfancher/haskell-notes/blob/master/haskell-notes.md)
+© 2022 by [Keith Fancher](https://github.com/keithfancher) is licensed under
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
