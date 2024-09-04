@@ -177,9 +177,9 @@ and provides some great insight throughout.
 
 Some other useful stuff:
 
-* [The Stack intro user guide](https://docs.haskellstack.org/en/stable/GUIDE/)
+* [The Stack intro user guide](https://docs.haskellstack.org/en/stable/tutorial/)
 * [stack.yaml versus package.yaml versus a Cabal
-  file](https://docs.haskellstack.org/en/stable/stack_yaml_vs_cabal_package_file/)
+  file](https://docs.haskellstack.org/en/stable/topics/stack_yaml_vs_cabal_package_file/)
 * Stack uses a tool called [hpack](https://github.com/sol/hpack) to generate
   cabal files. I had to poke around in hpack's docs to solve some early
   project problems. You might too.
@@ -201,7 +201,7 @@ except for the occasional utility that you'll use *outside of the context of
 your project*.
 
 See [this excellent section of the Stack user
-guide](https://docs.haskellstack.org/en/stable/GUIDE/#the-stack-install-command-and-copy-bins-option)
+guide](https://docs.haskellstack.org/en/stable/tutorial/stack_build_synonyms/#the-stack-install-command-and-copy-bins-option)
 for more information and clarity.
 
 ### Stackage
