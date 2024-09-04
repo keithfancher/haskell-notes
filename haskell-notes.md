@@ -1153,7 +1153,7 @@ pretty magical. Give it a shot.
   thinking. (Spoiler alert: "first-class functions" is the answer to so many
   problems!)
 * [Writing a game in
-  Haskell](https://joevargas.me/blog/2018-02-28-A-Game-in-Haskell.html): a
+  Haskell](https://joevargas.name/blog/2018-02-28-A-Game-in-Haskell.html): a
   great, wonderfully-detailed blog post about building an SDL-based game in
   Haskell.
 * [Module organization guidelines for Haskell
